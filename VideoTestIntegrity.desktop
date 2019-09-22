@@ -1,0 +1,17 @@
+#contact: piotr4@gmail.com
+#version 1.0
+#GPLv3
+
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=video/x-flv;video/mp4;application/x-mpegURL;video/MP2T;video/3gpp;video/quicktime;video/x-msvideo;video/x-ms-wmv;video/x-matroska;video/webm;video/ogg;video/mpeg;video/h264;
+Actions=ffmpegVideoTest
+X-KDE-Priority=TopLevel
+X-KDE-Submenu=Video Analyse
+X-KDE-StartupNotify=false
+
+[Desktop Action ffmpegVideoTest]
+Name=Test Video Integrity
+Icon=folder-videos-symbolic
+Exec=type ffmpeg; if [ $? -eq 0 ]; then konsole --hold -e bash -c 'ffmpeg -threads 1 -v error -i "%u" -f null /dev/null; kdialog --title "Integrity test" --passivepopup "Video test complete. ('%u')";  kdialog --title "Operation" --msgbox "Video test complete. Check the console for detais.";'; else kdialog --title "Package missing" --error "Please install ffmpeg from package manager."; fi;
